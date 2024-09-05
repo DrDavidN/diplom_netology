@@ -161,4 +161,32 @@ Yandex Cloud CLI 0.128.0
 1. Создаею сервисный аккаунт в Yandex Cloud с именем ```diploma-sa```в каталоге ```diplom```. Создаю папку ```yc resource-manager folder create --name diplom``` Создаем аккаунт ```yc iam service-account create --name diplom-sa --folder-name diplom``` и назначаем права ```yc resource-manager folder add-access-binding diplom --role admin --subject serviceAccount:aje*``` получаем ключ ```yc iam key create --folder-name diplom --service-account-name diplom-sa --output key.json```
 2. Запускаю ```terraform apply --auto-approve``` в папке preparation, который создаст специальную сервисную учетку tf-sa и S3 бакет для terraform backend в основном проекте.
 ![image](https://github.com/user-attachments/assets/8b78ae83-db4b-45c3-aa6a-72ecd3c45599)
- 
+![image](https://github.com/user-attachments/assets/66bc38de-c48a-4829-9164-22afcb206019)
+
+4. Подготавливаю основновной манифест в папке terraform с VPC и запускаю его используя ключи из backend.key, которые получил на прошлом шаге:
+
+```terraform init -backend-config="access_key=***" -backend-config="secret_key=***"```
+
+```terraform apply --auto-approve```
+
+![image](https://github.com/user-attachments/assets/ffba0057-675f-4eeb-9360-c51957e1685c)
+![image](https://github.com/user-attachments/assets/fcb566d3-b91a-4f81-9825-82442c058c7c)
+
+## 2. Запустить и сконфигурировать Kubernetes кластер.
+
+Установлю kubespray, он будет находится в ```./ansible/kubespray```
+
+```
+wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v2.21.0.tar.gz
+tar -xvzf v2.21.0.tar.gz
+mv kubespray-2.21.0 kubespray
+python3 -m pip install --upgrade pip
+pip3 install -r kubespray/requirements.txt
+```
+
+Создам k8s-кластер состоящий из 3-ех master и worker нод, размещенных в разных подсетях.
+
+Использую манифесты ./terraform/k8s-masters.tf и ./terraform/k8s-workers.tf ./terraform/ansible.tf. Которые поднимут ВМ и через kubespray развернут кластер.
+
+```terraform apply --auto-approve```
+
