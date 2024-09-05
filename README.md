@@ -156,3 +156,9 @@ Yandex Cloud CLI 0.128.0
 ![image](https://github.com/user-attachments/assets/e27e2605-135f-40d0-9afc-9ec80dd4c81d)
 
 
+## 1. Подготовить облачную инфраструктуру на базе облачного провайдера Яндекс.Облако.
+
+1. Создаею сервисный аккаунт в Yandex Cloud с именем ```diploma-sa```в каталоге ```diplom```. Создаю папку ```yc resource-manager folder create --name diplom``` Создаем аккаунт ```yc iam service-account create --name diplom-sa --folder-name diplom``` и назначаем права ```yc resource-manager folder add-access-binding diplom --role admin --subject serviceAccount:aje*``` получаем ключ ```yc iam key create --folder-name diplom --service-account-name diplom-sa --output key.json```
+2. Запускаю ```terraform apply --auto-approve``` в папке preparation, который создаст специальную сервисную учетку tf-sa и S3 бакет для terraform backend в основном проекте.
+![image](https://github.com/user-attachments/assets/8b78ae83-db4b-45c3-aa6a-72ecd3c45599)
+ 
