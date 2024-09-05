@@ -177,11 +177,11 @@ Yandex Cloud CLI 0.128.0
 Установлю kubespray, он будет находится в ```./ansible/kubespray```
 
 ```
-wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v2.21.0.tar.gz
-tar -xvzf v2.21.0.tar.gz
-mv kubespray-2.21.0 kubespray
+wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v2.25.0.tar.gz
+tar -xvzf v2.25.0.tar.gz
+mv kubespray-2.25.0/ ./ansible/kubespray
 python3 -m pip install --upgrade pip
-pip3 install -r kubespray/requirements.txt
+pip3 install -r ansible/kubespray/requirements.txt
 ```
 
 Создам k8s-кластер состоящий из 3-ех master и worker нод, размещенных в разных подсетях.
