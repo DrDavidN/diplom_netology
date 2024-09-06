@@ -185,4 +185,15 @@ latest: digest: sha256:988a1666e10e9fa634799ad35f664cf0a29130383c6d3beb424fca6de
 ## 5. Настроить CI для автоматической сборки и тестирования.
 ## 6. Настроить CD для автоматического развёртывания приложения.
 
+Ипортирую проект в Gitlab из Github [Репозиторий GitHub с тестовым приложением](https://github.com/DrDavidN/diplom-test-app)
+
+Регистрирую Агента, записываю токен и параметры установки в манифест cicd.tf
+
+Применяю манифест для установки агента в кластер ```terraform apply --auto-approve```
+
+![image](https://github.com/user-attachments/assets/dfc1eefd-4d4e-4ecc-b1cf-2a7d7914ac1b)
+
+![image](https://github.com/user-attachments/assets/825677a1-8b1c-4b50-b1a2-c50ab6479609)
+
+
 
