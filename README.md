@@ -190,3 +190,11 @@ sudo pip3 install -r ansible/kubespray/requirements.txt
 
 ```terraform apply --auto-approve```
 
+![image](https://github.com/user-attachments/assets/94a5f30d-2f48-479e-8a5d-592b0e23b6b8)
+![image](https://github.com/user-attachments/assets/5e5cee21-19ae-4995-aece-b746be8e7cf5)
+
+```kubectl get nodes -A -owide```
+
+```kubectl get pods -A -owide```
+
+![image](https://github.com/user-attachments/assets/33186333-1076-4431-9f11-9cf5adbd7d80)
