@@ -182,4 +182,7 @@ latest: digest: sha256:988a1666e10e9fa634799ad35f664cf0a29130383c6d3beb424fca6de
 
 ![image](https://github.com/user-attachments/assets/a8ebc3a3-09ba-41b2-b79a-86592148e652)
 
----
+## 5. Настроить CI для автоматической сборки и тестирования.
+## 6. Настроить CD для автоматического развёртывания приложения.
+
+
