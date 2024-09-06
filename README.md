@@ -108,6 +108,7 @@ sudo pip3 install -r ansible/kubespray/requirements.txt
 Собираю образ и отправляю его в Docker Hub
 
 <details>
+ 
 ```
 dribnokhod@debian11:~$ git clone https://github.com/DrDavidN/diplom-test-app.git
 Клонирование в «diplom-test-app»…
