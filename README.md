@@ -200,3 +200,100 @@ sudo pip3 install -r ansible/kubespray/requirements.txt
 ![image](https://github.com/user-attachments/assets/33186333-1076-4431-9f11-9cf5adbd7d80)
 
 ## 3. Установить и настроить систему мониторинга.
+
+Используя манифест ```./terraform/monitoring.tf``` и ```./k8s/service-grafana.yaml``` сконфигурирую мониторинг и сервис grafana. 
+
+Подготовлю network_load_balancer для доступа к grafana и diplom-test-app ```./terraform/nlb.tf```
+
+```terraform apply --auto-approve```
+
+![image](https://github.com/user-attachments/assets/b1683e81-8c1e-4e1b-9bad-4457fcd073b8)
+
+![image](https://github.com/user-attachments/assets/926cda5f-5560-4fb4-860a-dc39cba4cfa9)
+
+Подключаюсь к Grafana по порту 3000 Логин: admin Пароль: prom-operator, открываю дашборд Kubernetes / Compute Resources / Cluster
+
+![image](https://github.com/user-attachments/assets/f8339769-54ba-49c9-ad76-e73a55b82164)
+
+![image](https://github.com/user-attachments/assets/3b3673a7-9b76-4f19-b9e0-2f6f94fc066a)
+
+## 4. Настроить и автоматизировать сборку тестового приложения с использованием Docker-контейнеров.
+
+Скачиваею подготовленный репозиторий [Репозиторий с тестовым приложением](https://github.com/DrDavidN/diplom-test-app)
+
+Собираю образ и отправляю его в Docker Hub
+
+<details>
+```
+dribnokhod@debian11:~$ git clone https://github.com/DrDavidN/diplom-test-app.git
+Клонирование в «diplom-test-app»…
+remote: Enumerating objects: 11, done.
+remote: Counting objects: 100% (11/11), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 11 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Получение объектов: 100% (11/11), готово.
+dribnokhod@debian11:~$ cd diplom-test-app/
+dribnokhod@debian11:~/diplom-test-app$sudo docker login
+Authenticating with existing credentials...
+WARNING! Your password will be stored unencrypted in /home/dribnokhod/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+
+Login Succeeded
+dribnokhod@debian11:~/diplom-test-app$ sudo docker build -t drdavidn/diplom-test-app:v1.0.0 .
+[sudo] пароль для dribnokhod:
+[+] Building 68.5s (7/7) FINISHED                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                       0.5s
+ => => transferring dockerfile: 89B                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/nginx:latest                                                                                                                            2.9s
+ => [internal] load .dockerignore                                                                                                                                                          0.3s
+ => => transferring context: 2B                                                                                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                          0.4s
+ => => transferring context: 828B                                                                                                                                                          0.0s
+ => [1/2] FROM docker.io/library/nginx:latest@sha256:04ba374043ccd2fc5c593885c0eacddebabd5ca375f9323666f28dfd5a9710e3                                                                     61.3s
+ => => resolve docker.io/library/nginx:latest@sha256:04ba374043ccd2fc5c593885c0eacddebabd5ca375f9323666f28dfd5a9710e3                                                                      0.4s
+ => => sha256:88a0a069d5e9865fcaaf8c1e53ba6bf3d8d987b0fdc5e0135fec8ce8567d673e 2.29kB / 2.29kB                                                                                             0.0s
+ => => sha256:39286ab8a5e14aeaf5fdd6e2fac76e0c8d31a0c07224f0ee5e6be502f12e93f3 7.47kB / 7.47kB                                                                                             0.0s
+ => => sha256:04ba374043ccd2fc5c593885c0eacddebabd5ca375f9323666f28dfd5a9710e3 10.27kB / 10.27kB                                                                                           0.0s
+ => => sha256:a2318d6c47ec9cac5acc500c47c79602bcf953cec711a18bc898911a0984365b 29.13MB / 29.13MB                                                                                          25.7s
+ => => sha256:095d327c79ae6eb03406dd754eb917fbe7009c6a9aa6c0db558f9dea599db8ea 41.88MB / 41.88MB                                                                                          30.6s
+ => => sha256:bbfaa25db775e54ec75dabe7986451cb99911b082d63bbf983ab20fc6f7faaf4 628B / 628B                                                                                                 1.6s
+ => => sha256:7bb6fb0cfb2b319dee79e476c11620e7fa47f22ecdedc999e207984f62a4554c 956B / 956B                                                                                                 3.0s
+ => => sha256:0723edc10c178df9245f49c9b8e503c4223a959ee5a072f043d71669132bc5e9 394B / 394B                                                                                                 4.2s
+ => => sha256:24b3fdc4d1e3b419643068364b3d4e1b7e280f5a8a3c1e3651e9e67363e6434b 1.21kB / 1.21kB                                                                                             5.2s
+ => => sha256:3122471704d5d924d1f7daac334252487e3c35bfb23163b840954aff355c4a6b 1.40kB / 1.40kB                                                                                             6.2s
+ => => extracting sha256:a2318d6c47ec9cac5acc500c47c79602bcf953cec711a18bc898911a0984365b                                                                                                 17.0s
+ => => extracting sha256:095d327c79ae6eb03406dd754eb917fbe7009c6a9aa6c0db558f9dea599db8ea                                                                                                 13.9s
+ => => extracting sha256:bbfaa25db775e54ec75dabe7986451cb99911b082d63bbf983ab20fc6f7faaf4                                                                                                  0.0s
+ => => extracting sha256:7bb6fb0cfb2b319dee79e476c11620e7fa47f22ecdedc999e207984f62a4554c                                                                                                  0.0s
+ => => extracting sha256:0723edc10c178df9245f49c9b8e503c4223a959ee5a072f043d71669132bc5e9                                                                                                  0.0s
+ => => extracting sha256:24b3fdc4d1e3b419643068364b3d4e1b7e280f5a8a3c1e3651e9e67363e6434b                                                                                                  0.0s
+ => => extracting sha256:3122471704d5d924d1f7daac334252487e3c35bfb23163b840954aff355c4a6b                                                                                                  0.0s
+ => [2/2] COPY content /usr/share/nginx/html                                                                                                                                               2.7s
+ => exporting to image                                                                                                                                                                     0.3s
+ => => exporting layers                                                                                                                                                                    0.2s
+ => => writing image sha256:ea9416ac49b3cb30315545665841dde6af63ba6b4797c6ba79dd186e61605e19                                                                                               0.0s
+ => => naming to docker.io/drdavidn/diplom-test-app:v1.0.0                                                                                                                                 0.0s
+dribnokhod@debian11:~/diplom-test-app$ sudo docker tag drdavidn/diplom-test-app:v1.0.0 drdavidn/diplom-test-app:latest
+dribnokhod@debian11:~/diplom-test-app$ sudo docker push drdavidn/diplom-test-app:latest
+The push refers to repository [docker.io/drdavidn/diplom-test-app]
+d138f21af234: Pushed
+11de3d47036d: Mounted from library/nginx
+16907864a2d0: Mounted from library/nginx
+2bdf51597158: Mounted from library/nginx
+0fc6bb94eec5: Mounted from library/nginx
+eda13eb24d4c: Mounted from library/nginx
+67796e30ff04: Mounted from library/nginx
+8e2ab394fabf: Mounted from library/nginx
+latest: digest: sha256:988a1666e10e9fa634799ad35f664cf0a29130383c6d3beb424fca6de4232b4a size: 1985
+```
+</details>
+
+Используя манифест app.tf и yaml файлы ../k8s/deployment-testapp.yaml и ../k8s/service-testapp.yaml разворачиваю приложение на ВМ
+
+```terraform apply --auto-approve```
+
+![image](https://github.com/user-attachments/assets/de90bc7a-1cff-4090-b0cf-103988372e5a)
+
+![image](https://github.com/user-attachments/assets/a8ebc3a3-09ba-41b2-b79a-86592148e652)
+
