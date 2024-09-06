@@ -198,3 +198,5 @@ sudo pip3 install -r ansible/kubespray/requirements.txt
 ```kubectl get pods -A -owide```
 
 ![image](https://github.com/user-attachments/assets/33186333-1076-4431-9f11-9cf5adbd7d80)
+
+## 3. Установить и настроить систему мониторинга.
