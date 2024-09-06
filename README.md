@@ -95,7 +95,7 @@ sudo pip3 install -r ansible/kubespray/requirements.txt
 
 ![image](https://github.com/user-attachments/assets/926cda5f-5560-4fb4-860a-dc39cba4cfa9)
 
-Подключаюсь к Grafana по порту 3000 Логин: admin Пароль: prom-operator, открываю дашборд Kubernetes / Compute Resources / Cluster
+Подключаюсь к [Grafana](http://51.250.36.253:3000) по порту 3000 Логин: admin Пароль: prom-operator, открываю дашборд Kubernetes / Compute Resources / Cluster
 
 ![image](https://github.com/user-attachments/assets/f8339769-54ba-49c9-ad76-e73a55b82164)
 
@@ -182,6 +182,8 @@ latest: digest: sha256:988a1666e10e9fa634799ad35f664cf0a29130383c6d3beb424fca6de
 
 ![image](https://github.com/user-attachments/assets/a8ebc3a3-09ba-41b2-b79a-86592148e652)
 
+[Ссылка на приложение](http://84.201.147.207/)
+
 ## 5. Настроить CI для автоматической сборки и тестирования.
 ## 6. Настроить CD для автоматического развёртывания приложения.
 
@@ -195,5 +197,9 @@ latest: digest: sha256:988a1666e10e9fa634799ad35f664cf0a29130383c6d3beb424fca6de
 
 ![image](https://github.com/user-attachments/assets/825677a1-8b1c-4b50-b1a2-c50ab6479609)
 
+Объявляю переменные REGISTRY_PASSWORD и REGISTRY_USER для DockerHub в GitLab - Settings - CI/CD - Variables
 
+Настриваю [GitLab CI](https://gitlab.com/DrDavidN/diplom-test-app/-/blob/main/.gitlab-ci.yml?ref_type=heads) и добавляю в проект [HELM](https://gitlab.com/DrDavidN/diplom-test-app/-/tree/main/deploy?ref_type=heads)
 
+Пример [build](https://gitlab.com/DrDavidN/diplom-test-app/-/jobs/7766375546)
+Пример [build и deploy]()
