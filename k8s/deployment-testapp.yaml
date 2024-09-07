@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diplom-test-app
+  labels:
+    app: diplom-test-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: diplom-test-app
+  template:
+    metadata:
+      labels:
+        app: diplom-test-app
+    spec:
+      containers:
+        - name: diplom-test-app
+          image: drdavidn/diplom-test-app:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "1"
