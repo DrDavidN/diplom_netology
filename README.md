@@ -203,3 +203,7 @@ latest: digest: sha256:988a1666e10e9fa634799ad35f664cf0a29130383c6d3beb424fca6de
 Пример [build](https://gitlab.com/DrDavidN/diplom-test-app/-/jobs/7766375546)
 
 Пример [build и deploy](https://gitlab.com/DrDavidN/diplom-test-app/-/pipelines/1444004105)
+
+Приложение обновилось
+![image](https://github.com/user-attachments/assets/655b9755-5b62-464f-b177-2f36b1d4eca0)
+
