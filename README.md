@@ -105,7 +105,7 @@ sudo pip3 install -r ansible/kubespray/requirements.txt
 
 Скачиваею подготовленный репозиторий [Репозиторий с тестовым приложением](https://github.com/DrDavidN/diplom-test-app)
 
-Собираю образ и отправляю его в Docker Hub
+Собираю образ и отправляю его в Docker Hub [Ссылка на образ в Docker](https://hub.docker.com/repository/docker/drdavidn/diplom-test-app)
 
 <details>
  
@@ -184,8 +184,7 @@ latest: digest: sha256:988a1666e10e9fa634799ad35f664cf0a29130383c6d3beb424fca6de
 
 [Ссылка на приложение](http://84.201.147.207/)
 
-## 5. Настроить CI для автоматической сборки и тестирования.
-## 6. Настроить CD для автоматического развёртывания приложения.
+## 5. Настроить CI для автоматической сборки и тестирования. + 6. Настроить CD для автоматического развёртывания приложения.
 
 Ипортирую проект в Gitlab из Github [Репозиторий GitHub с тестовым приложением](https://github.com/DrDavidN/diplom-test-app)
 
@@ -202,4 +201,5 @@ latest: digest: sha256:988a1666e10e9fa634799ad35f664cf0a29130383c6d3beb424fca6de
 Настриваю [GitLab CI](https://gitlab.com/DrDavidN/diplom-test-app/-/blob/main/.gitlab-ci.yml?ref_type=heads) и добавляю в проект [HELM](https://gitlab.com/DrDavidN/diplom-test-app/-/tree/main/deploy?ref_type=heads)
 
 Пример [build](https://gitlab.com/DrDavidN/diplom-test-app/-/jobs/7766375546)
-Пример [build и deploy]()
+
+Пример [build и deploy](https://gitlab.com/DrDavidN/diplom-test-app/-/pipelines/1444004105)
